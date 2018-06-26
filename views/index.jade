@@ -1,5 +1,102 @@
-extends layout
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+    // Ignite UI Required Combined CSS Files
+    link(href='http://cdn-na.infragistics.com/igniteui/2018.1/latest/css/themes/infragistics/infragistics.theme.css', rel='stylesheet')
+    link(href='http://cdn-na.infragistics.com/igniteui/2018.1/latest/css/structure/modules/infragistics.ui.layout.css', rel='stylesheet')
+    link(href='http://cdn-na.infragistics.com/igniteui/2018.1/latest/css/structure/infragistics.css', rel='stylesheet')
+    // Modernizr/jQuery/jQuery UI
+    script(src='http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js')
+    script(src='http://code.jquery.com/jquery-1.11.3.min.js')
+    script(src='http://code.jquery.com/ui/1.11.1/jquery-ui.min.js')
+    // Ignite UI Required Combined JavaScript Files
+    script(src='http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/infragistics.core.js')
+    script(src='http://cdn-na.infragistics.com/igniteui/2018.1/latest/js/infragistics.lob.js')
+    //Billboard
+    script(src='https://d3js.org/d3.v4.min.js')
+    link(rel="stylesheet" href="/billboard/billboard.css")
+    script(src="/billboard/billboard.js")
+  body(style="background: #ededed")
+    div(class="navbar navbar-default navbar-static-top" style="background: #a31432")
+      div(class="conatiner" style="color: white;")
+        div(style="padding-bottom:6px; padding-left:10px; float: left")
+          h1 Sejong Tracker
+        div(style="margin-right: 20px; float:right; margin-top: 20px; vertical-align:middle")
+          p
+            a(href="/logout") logout
+        div(style="margin-right: 20px; float:right; margin-top: 20px; vertical-align:middle")
+          p 김태우님
+    div(class="container")
+      #layout(style='width:1100px; height: 630px; display:block;')
+        .left(style="background:#ffd7e0; margin-right: 10px; elevation: above")
+          div(style="height:70px; text-align:center; background:#EF90A6")
+            p(style="padding-top: 20px; font-size:25px; color: white; font-weight:bold") CURRICULUM
+          div
+            table(class="table table-hover")
+              tbody(style="text-align:center")
+                tr(style="height: 100px; font-size:25px;")
+                  td(style="padding-top:33px; color: white") 1학년
+                tr(style="height: 100px; font-size:25px;")
+                  td(style="padding-top:33px; color: white") 2학년
+                tr(style="height: 100px; font-size:25px;")
+                  td(style="padding-top:33px; color: white") 3학년
+                tr(style="height: 100px; font-size:25px;")
+                  td(style="padding-top:33px; color: white") 4학년
 
-block content
-  h1= title
-  p Welcome to #{title}
+        .right(style="background:#cfd2d6; margin-left: 10px")
+          div(style="height:70px; text-align:center;")
+            p(style="padding-top: 20px; font-size:25px; font-weight:bold") 트랙 진행율
+          div(id="chart" style="height:500px; width:200px;")
+
+        .header(style="background:#242930; margin-top: 10px; margin-bottom: 10px; color:white") Sejong University
+        .center(style="margin: 10px; text-align:center")
+          div(style="margin-bottom: 10px")
+            a(href="/track")
+              img(src="/trackImg.jpg" width="550px")
+          div(style="background: #f9eaec; height: 205px")
+            | 공지사항
+            
+
+      script(type='text/javascript').
+        $(document).ready(function () {
+        $('#layout').igLayoutManager({
+        layoutMode: "border",
+        borderLayout: {
+        leftWidth: "250px",
+        rightWidth: "250px"
+        }
+        });
+        });
+
+      script.
+        var chart = bb.generate({
+          bindto: "#chart",
+          data: {
+            type: "bar",
+              columns: [
+              ["data1", 60],
+            ],
+            colors: {
+              data1: "#a31432",
+            },
+            names: {
+              data1: '알고리즘트랙'
+            }
+          },
+          bar: {
+            width: {
+              ratio: 0.5
+            }
+          },
+          axis: {
+            y: {
+              max: 90
+            }
+          }
+        });
+
