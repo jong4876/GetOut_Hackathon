@@ -53,6 +53,7 @@ app.use('/', require('./routes/index'));
 app.use('/index', require('./routes/index'));
 app.use('/track', require('./routes/track'));
 app.use('/subject', require('./routes/subject'));
+app.use('/subject_search', require('./routes/subject_search'));
 app.use('/mypage', require('./routes/mypage'));
 // auth
 app.use('/login', require('./routes/auth/login'));

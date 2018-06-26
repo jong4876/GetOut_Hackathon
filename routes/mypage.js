@@ -35,11 +35,16 @@ router.route('/')
             }
             pool.query( 'select F_track from Student where student_id=?',inserts , function( err, frow ) {
                 if (err){
-                        console.log(err);
-                        res.status(500).json({
+                    console.log(err);
+                    res.status(500).json({
                         result: false,
                         qry: this.sql
                     });
+                    return;
+                }
+                else if (frow.length == 0)
+                {
+                    res.redirect('/login');
                     return;
                 }
                 ftrack += frow[0].F_track;

@@ -3,7 +3,12 @@ var router = express.Router();
 
 router.route('/')
 .get((req, res)=>{
-  pool.query('select * from Subject', function(err, rows) {
+  console.log('query', req.query.sub_name);
+
+  var sql = 'select * from Subject where Subject_name = ?';
+  var inserts = [req.query.sub_name];
+
+  pool.query(sql, inserts, function( err, rows ) {
     if (err){
       console.log(err);
       res.status(500).json({
@@ -14,9 +19,8 @@ router.route('/')
       return;
     }
     console.log(rows);
-    res.render('subject', { title: 'Subject', data:rows});
+    res.render('subject', { title: 'Search', data: rows });
   });
 });
-
 
 module.exports = router;
