@@ -1,7 +1,17 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		div(id='menu_bar')
+			style(type='text/css').
+				form {display: inline;}
+				button {width: 100px; margin: 5px;}
+			form(action='/track')
+				button 홈
+			form(action='/subject')
+				button 과목검색
+			form(action='/manage')
+				button 관리
+		block content
