@@ -52,7 +52,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/index', require('./routes/index'));
 app.use('/track', require('./routes/track'));
-app.use('/search', require('./routes/search'));
+app.use('/subject', require('./routes/subject'));
+app.use('/subject_search', require('./routes/subject_search'));
 app.use('/mypage', require('./routes/mypage'));
 // auth
 app.use('/login', require('./routes/auth/login'));

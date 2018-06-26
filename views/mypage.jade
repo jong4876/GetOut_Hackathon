@@ -1,5 +1,42 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  style.
+    #content {margin: 10px;}
+    #sub_menus {margin: 10px; padding: 10px;}
+    form {display: inline; margin: 3px;}
+    tr#track1 {background-color: #ebf9ff;}
+    tr#track2 {background-color: #dff5ff;}
+  div#content
+    #sub_menus.alert.alert-info
+      form(action='#')
+        button.btn.btn-lg.btn-primary 선호트랙 이수율
+      form(action='#')
+        button.btn.btn-lg.btn-success 1:1 문의
+
+    .container-fluid
+      .alert.alert-info
+        table.table.table-striped
+          tr
+            th(style="width: 25%") 트랙
+            th(style="width: 15%") 트랙명
+            th(style="width: 35%") 트랙설명
+            th(style="width: 25%") 트랙 이수율
+          tr#track1
+            td
+              img.img-circle(src='#{track1.Track_img}')
+            td 
+              b #{track1.Track_name}
+            td 
+              b #{track1.Track_info}
+            td
+              b #{basic_per} %
+          tr#track2
+            td
+              img.img-circle(src='#{track2.Track_img}')
+            td 
+              b #{track2.Track_name}
+            td 
+              b #{track2.Track_info}
+            td
+              b #{app_per} %
