@@ -1,14 +1,14 @@
 doctype html
 html
     head
-        meta(charset='utf-8')
     body
-        h1 Login
-        form(action="/login" method='post')
+        h1 Registration
+        form(action="/register" method='post')
             p
                 input(type='text' name='userID' placeholder='userID')
+            p
+                input(type='text' name='username' placeholder='username')    
             p
                 input(type='password' name='password' placeholder='password')
             p
                 input(type='submit')
-        a(href="/register") 회원가입
