@@ -7,8 +7,8 @@ router.route('/')
 .get((req, res)=>{
     pool.query( 'select * from Subject' , function( err, rows ) {
         if (err){
-                console.log(err);
-                res.status(500).json({
+            console.log(err);
+            res.status(500).json({
                 result: false,
                 msg: "db 접속 에러",
                 qry: this.sql
@@ -31,8 +31,8 @@ router.route('/search')
 
     pool.query(sql, inserts  , function( err, rows ) {
         if (err){
-                console.log(err);
-                res.status(500).json({
+            console.log(err);
+            res.status(500).json({
                 result: false,
                 msg: "db 접속 에러",
                 qry: this.sql
