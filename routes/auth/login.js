@@ -2,12 +2,9 @@ module.exports = function(conn){
     var express = require('express');
     var router = express.Router();
     var bodyParser = require('body-parser');
-    var bcrypt = require('bcrypt');
-    
-    var passport = require('passport')
-    var LocalStrategy = require('passport-local').Strategy;
+    var bcrypt = require('bcrypt-nodejs');
 
-    router.post('/login', (req, res)=>{
+    router.post('/', (req, res)=>{
         var userID = req.body.userID;
         var password = req.body.password;
 
@@ -20,49 +17,25 @@ module.exports = function(conn){
                 if(result.length === 0){
                     res.send('User Not Found');
                 } else {
-                    //if(!bcrypt.compareSync(password, result[0].Student_Passwd)){
-                    if(password != result[0].Student_Passwd){
-                        res.send('Password is not correct');
-                    } else {
+                    if(password === result[0].Student_Passwd){
                         req.session.authID = userID;
                         res.send('Welcome, ' + result[0].Student_Name);
+                    } else {
+                        res.send('Password is not correct');
                     }
                 }
             }
         });
     });
 
-    router.get('/login', (req, res)=>{
+    router.get('/', (req, res)=>{
         res.render('./login', {authID: req.session.authID});
-    });
-
-    router.get('/register', (req, res)=>{
-        res.render('register')
-    });
-
-    router.post('/register', (req, res)=>{
-        var userID = req.body.userID;
-        var username = req.body.username;
-        var password = req.body.password;
-
-        var sql = 'INSERT INTO Student VALUES(?,?,?)';
-        conn.query(sql, [userID, username, password], (err, result)=>{
-            if(err){
-                console.log('err : ' + err);
-                res.status(500).send("Internal Server Error");
-            }else{
-                req.session.authID = userID;
-                req.session.save(()=>{
-                    res.redirect('/auth/login');
-                });
-            }
-        });
     });
 
     router.post('/logout', (req, res)=>{
         delete req.session.authID;
         req.session.save(()=>{
-            res.redirect('/auth/login');
+            res.redirect('/login');
         });
     });
 
