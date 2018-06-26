@@ -1,14 +1,37 @@
 extends layout
 
 block content
-	style.
-		form {display: inline;}
-		form>button {width: 100px; height: 30px;}
-	h1= title
+  style.
+    #content {margin: 10px;}
+    #sub_menus {margin: 10px; padding: 10px;}
+    form {display: inline; margin: 3px;}
+    tr#track1 {background-color: #ebf9ff;}
+    tr#track2 {background-color: #dff5ff;}
+  div#content
+    #sub_menus.alert.alert-info
+      form(action='#')
+        button.btn.btn-lg.btn-primary 선호트랙 이수율
+      form(action='#')
+        button.btn.btn-lg.btn-success 1:1 문의
 
-	form(action='mypage')
-		button= '나의 트랙'
-	form(action='qna')
-		button= '1:1 문의'
-	p= #{track1.Track_img} #{track1.Track_name}
-	p= #{track2.Track_img} #{track2.Track_name}
+    .container-fluid
+      .alert.alert-info
+        table.table.table-striped
+          tr
+            th 트랙
+            th 트랙명
+            th 트랙 이수율
+          tr#track1
+            td
+              img.img-circle(src='#{track1.Track_img}')
+            td 
+              b #{track1.Track_name}
+            td
+              b 90%
+          tr#track2
+            td
+              img.img-circle(src='#{track2.Track_img}')
+            td 
+              b #{track2.Track_name}
+            td
+              b 100%
