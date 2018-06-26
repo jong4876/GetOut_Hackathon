@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,6 +23,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// session setting
+app.use(session({
+  secret: 'wqlker129038ksadlku98123hnkjsandjoi13',
+  resave: false,
+  saveUninitialized: true,
+  store: new MySQLStore({
+      host: 'localhost',
+      port: 3306,
+      user: 'root',
+      password: 'qlrqodxodn12',
+      database: 'hackathon'
+  })
+}));
+
+var conn = require('./config/db')();
+
+var auth = require('./routes/auth/login')(conn);
+app.use('/auth', auth);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

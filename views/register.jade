@@ -2,12 +2,13 @@ doctype html
 html
     head
     body
-        h1 Login
-        form(action="/auth/login" method='post')
+        h1 회원가입
+        form(action="/auth/register" method='post')
             p
                 input(type='text' name='userID' placeholder='userID')
+            p
+                input(type='text' name='username' placeholder='username')    
             p
                 input(type='password' name='password' placeholder='password')
             p
                 input(type='submit')
-        a(href="/auth/register") 회원가입
