@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var subjectRouter = require('./routes/subject');
 // manage
+var manageRouter = require('./routes/manage');
 var studentRouter = require('./routes/manage/student');
 
 var app = express();
@@ -38,6 +39,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/subject', subjectRouter);
 // manage
+app.use('/manage', manageRouter);
 app.use('/manage/student', studentRouter);
 
 

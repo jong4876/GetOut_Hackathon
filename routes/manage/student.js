@@ -1,7 +1,6 @@
 let util = require('util');
 let express = require('express');
 let router = express.Router();
-let app = express();
 let TABLE = 'Student';
 
 let error_handler = (error) => {
