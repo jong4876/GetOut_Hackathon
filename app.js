@@ -7,6 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var subjectRouter = require('./routes/subject');
+// manage
+var manageRouter = require('./routes/manage');
+var studentRouter = require('./routes/manage/student');
 
 var app = express();
 
@@ -35,6 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/subject', subjectRouter);
+// manage
+app.use('/manage', manageRouter);
+app.use('/manage/student', studentRouter);
 
 
 // catch 404 and forward to error handler
@@ -51,6 +57,10 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.listen(3000, function(){
+  console.log('Connected 3000 port');
 });
 
 module.exports = app;
