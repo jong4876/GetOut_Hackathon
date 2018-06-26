@@ -4,35 +4,35 @@ html
     meta(charset='utf-8')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+
 
   body
     div(class="navbar navbar-default navbar-static-top" style="background: #a31432")
       div(class="conatiner" style="color: white;")
         h1 Sejong Tracker
-        h1 Hello, #{id}
     div(class="container" style="padding-top: 70px;")
-      div(role="tabpanel1")
-          ul(class="nav nav-tabs" role="tablist" id="myTab")
-            - for (var i=0; i<trackName.length/2; i++)
+      div(role="tabpanel")
+          ul(class="nav nav-tabs nav-justified" role="tablist" id="myTab" )
+            - for (var i=0; i<trackName.length; i++)
+                if i == trackName.length / 2
+                  br
                 li(role="presentation")
-                  a(href=`#${i}` aria-controls=`${i}` role="tab" data-toggle="tab")= trackName[i]
-          ul(class="nav nav-tabs" role="tablist" id="myTab")
-            - for (var i=trackName.length/2; i<trackName.length; i++)
-                li(role="presentation")
-                    a(href=`#${i}` aria-controls=`${i}` role="tab" data-toggle="tab")= trackName[i]
+                  a(href=`#a${i}` aria-controls=`${i}` role="tab" data-toggle="tab" aria-expanded="false")= trackName[i]
 
         div(class="tab-content")
-          div(role="tabpanel1" class="tab-pane active" id=`${i}`)
-            ul
-              each track in tracks[0]
-                li= track.Subject_Name
-          - for(var i=1; i<trackName.length; i++)
-            div(role="tabpanel1" class="tab-pane" id=`${i}`)
-              ul
+          - for(var i=0; i<trackName.length; i++)
+            div(role="tabpanel" class="tab-pane" id=`a${i}`)
+              ul(class="list-group")
                 each track in tracks[i]
-                  li= track.Subject_Name
+                  if track.Subject_Id == 1413
+                    li(class="list-group-item list-group-item-success")= track.Subject_Name
+                  else
+                    li(class="list-group-item")= track.Subject_Name
         script.
-          $(function () {
-            $('#myTab a:0').tab('show')
+          $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
           })
+          
