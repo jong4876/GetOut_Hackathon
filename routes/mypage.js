@@ -143,13 +143,19 @@ router.route('/')
                                         return;
                                     }
                                     console.log(app_mysql_rows);
-                                    var basicper = basic_mysql_rows[0].total/basic_count_rows[0].total;
+                                    console.log('basicper', basic_mysql_rows, basic_count_rows);
+                                    var basicper;
+                                    if (basic_count_rows.length == 0 || basic_mysql_rows.length == 0)
+                                        basicper = 0;
+                                    else
+                                        basicper = basic_mysql_rows[0].total/basic_count_rows[0].total;
+                                    
                                     var appper = app_mysql_rows[0].total/app_count_rows[0].total;
                                     console.log(rows1);
                                     console.log(rows2);
                                     console.log(basicper);
                                     console.log(appper);
-                                    res.render('mypage', { title: 'mypage', track1:rows1[0], track2:rows2[0], basic_per:basicper, app_per:appper });
+                                    res.render('mypage', { title: 'mypage', track1:rows1[0], track2:rows2[0], basic_per:basicper*100, app_per:appper*100 });
                                 });
                             });
                         });

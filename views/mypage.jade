@@ -20,18 +20,23 @@ block content
           tr
             th 트랙
             th 트랙명
+            th 트랙설명
             th 트랙 이수율
           tr#track1
             td
               img.img-circle(src='#{track1.Track_img}')
             td 
               b #{track1.Track_name}
+            td 
+              b #{track1.Track_info}
             td
-              b 90%
+              b #{basic_per} %
           tr#track2
             td
               img.img-circle(src='#{track2.Track_img}')
             td 
               b #{track2.Track_name}
+            td 
+              b #{track2.Track_info}
             td
-              b 100%
+              b #{app_per} %
