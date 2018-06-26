@@ -38,11 +38,11 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: new MySQLStore({
-      host: 'localhost',
+      host: 'hojong.xyz',
       port: 3306,
-      user: 'root',
-      password: '1234',
-      database: 'hackathon'
+      user: 'hackathon_2018_1',
+      password: 'wjswhdgh',
+      database: 'hackathon_2018_1_db'
   }),
   cookie:{
     maxAge: 24000 * 60 * 60 // 쿠키 유효기간 : 24시간
