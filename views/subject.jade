@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title #{title}
+    meta(charset='utf-8')
+  body
+    h1
+    a(href='/subject')
+      h1 Subject
+
+    form(action='/subject/search' method='post')
+      p
+        input(type='text' name='sub_name' placeholder = '과목이름')
+      p
+        input(type='submit')
+
+    each i in data
+      p
+      ul
+        li: #{i.Subject_Id}
+        li: #{i.Subject_Name}
+        li: #{i.Semester}
+        li: #{i.Professor}
+        li: #{i.Plan}
+        ul
+          -for(j=0 ; j < i.Track_Name.length ; j++)
+            if i.Track_Name[j] == "1"
+              case j
+                when 0: 비쥬얼 컴퓨팅,
+                when 1: 멀티미디어,
+                when 2: 사물인터넷,
+                when 3: 시스템응용,
+                when 4: 인공지능,
+                when 5: 가상현실,
+                when 6: 정보보호,
+                when 7: 데이터사이언스,
+                when 8: SW교육,
+                when 9: 사이버국방
+                default: 아몰랑
+        li: #{i.Type_id}
+        li: #{i.Professor}
