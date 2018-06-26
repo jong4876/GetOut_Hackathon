@@ -3,10 +3,32 @@ extends layout
 block content
   h1= title
   form(action='/subject/search' method='post')
-    p
-      input(type='text' name='sub_name' placeholder = '과목이름')
-    p
-      input(type='submit')
+    h2 검색
+    input(type='text' name='sub_name' placeholder = '과목이름')
+    input(type='submit' value='검색')
+  div
+    style().
+      div>button {
+        display: inline;
+        width: 130px;
+        height: 30px;
+      }
+    h2 필터
+    div
+      button 비주얼컴퓨팅 트랙
+      button 멀티미디어 트랙
+      button 사물인터넷 트랙
+      button 시스템응요 트랙
+      button 지능형인지 트랙
+      button 가상현실 트랙
+    div
+      button 1학년
+      button 2학년
+      button 3학년
+      button 4학년
+    div
+      button 1학기
+      button 2학기
 
   table(style='border: 1px solid black;')
     tr
@@ -28,15 +50,15 @@ block content
           -for(j=0 ; j < i.Track_Name.length ; j++)
             if i.Track_Name[j] == "1"
               case j
-                when 0: 비쥬얼 컴퓨팅,
-                when 1: 멀티미디어,
-                when 2: 사물인터넷,
-                when 3: 시스템응용,
-                when 4: 인공지능,
-                when 5: 가상현실,
-                when 6: 정보보호,
-                when 7: 데이터사이언스,
-                when 8: SW교육,
+                when 0: 비쥬얼 컴퓨팅 / 
+                when 1: 멀티미디어 / 
+                when 2: 사물인터넷 / 
+                when 3: 시스템응용 / 
+                when 4: 인공지능 / 
+                when 5: 가상현실 / 
+                when 6: 정보보호 / 
+                when 7: 데이터사이언스 / 
+                when 8: SW교육 / 
                 when 9: 사이버국방
                 default: 아몰랑
         td #{i.Type_id}

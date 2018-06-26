@@ -12,6 +12,9 @@ router.use('/register', register);
 var logout = require('./auth/logout');
 router.use('/logout', logout);
 
+var track = require('./track')(conn);
+router.use('/track', track);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });

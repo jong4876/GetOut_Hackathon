@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+
+  body
+    div(class="navbar navbar-default navbar-static-top" style="background: #a31432")
+      div(class="conatiner" style="color: white;")
+        h1 Sejong Tracker
+        h1 Hello, #{id}
+    div(class="container" style="padding-top: 70px;")
+      div(role="tabpanel1")
+          ul(class="nav nav-tabs" role="tablist" id="myTab")
+            - for (var i=0; i<trackName.length/2; i++)
+                li(role="presentation")
+                  a(href=`#${i}` aria-controls=`${i}` role="tab" data-toggle="tab")= trackName[i]
+          ul(class="nav nav-tabs" role="tablist" id="myTab")
+            - for (var i=trackName.length/2; i<trackName.length; i++)
+                li(role="presentation")
+                    a(href=`#${i}` aria-controls=`${i}` role="tab" data-toggle="tab")= trackName[i]
+
+        div(class="tab-content")
+          div(role="tabpanel1" class="tab-pane active" id=`${i}`)
+            ul
+              each track in tracks[0]
+                li= track.Subject_Name
+          - for(var i=1; i<trackName.length; i++)
+            div(role="tabpanel1" class="tab-pane" id=`${i}`)
+              ul
+                each track in tracks[i]
+                  li= track.Subject_Name
+        script.
+          $(function () {
+            $('#myTab a:0').tab('show')
+          })
