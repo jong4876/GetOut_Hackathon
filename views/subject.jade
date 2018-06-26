@@ -1,28 +1,30 @@
-doctype html
-html
-  head
-    title #{title}
-    meta(charset='utf-8')
-  body
-    h1
-    a(href='/subject')
-      h1 Subject
+extends layout
 
-    form(action='/subject/search' method='post')
-      p
-        input(type='text' name='sub_name' placeholder = '과목이름')
-      p
-        input(type='submit')
+block content
+  h1= title
+  form(action='/subject/search' method='post')
+    p
+      input(type='text' name='sub_name' placeholder = '과목이름')
+    p
+      input(type='submit')
 
+  table(style='border: 1px solid black;')
+    tr
+      th 학수번호
+      th 과목이름
+      th 학기
+      th 교수명
+      th 수업계획서
+      th 타입
+      th 교과
     each i in data
-      p
-      ul
-        li: #{i.Subject_Id}
-        li: #{i.Subject_Name}
-        li: #{i.Semester}
-        li: #{i.Professor}
-        li: #{i.Plan}
-        ul
+      tr
+        td #{i.Subject_Id}
+        td #{i.Subject_Name}
+        td #{i.Semester}
+        td #{i.Professor}
+        td #{i.Plan}
+        td
           -for(j=0 ; j < i.Track_Name.length ; j++)
             if i.Track_Name[j] == "1"
               case j
@@ -37,5 +39,4 @@ html
                 when 8: SW교육,
                 when 9: 사이버국방
                 default: 아몰랑
-        li: #{i.Type_id}
-        li: #{i.Professor}
+        td #{i.Type_id}

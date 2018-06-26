@@ -16,19 +16,7 @@ router.route('/')
             return;
         }
         console.log(rows);
-        if( rows.length === 0 ){
-            res.status(200).json({
-                result: false,
-                msg: "과목이 없습니다.",
-            });
-        }else{
-            // res.status(200).json({
-            //     result: false,
-            //     msg: "과목입니다",
-            //     data: rows
-            // });
-            res.render('subject', { title: 'Subject', data:rows});
-        }
+        res.render('subject', { title: 'Subject', data:rows});
     });
 });
 
@@ -52,20 +40,7 @@ router.route('/search')
             return;
         }
         console.log(rows);
-        if( rows.length === 0 ){
-            res.status(200).json({
-                result: false,
-                msg: "과목이 없습니다.",
-            });
-        }else{
-
-            // res.status(200).json({
-            //    result: false,
-            //            msg: "과목입니다",
-            //            data: rows
-            // });
-            res.render('subject', { title: 'Search', data: rows });
-        }
+        res.render('subject', { title: 'Search', data: rows });
     });
 });
 module.exports = router;
