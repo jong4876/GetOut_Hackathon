@@ -1,42 +1,47 @@
-module.exports = function(conn){
-    var express = require('express');
-    var router = express.Router();
-    var bodyParser = require('body-parser');
-    var bcrypt = require('bcrypt-nodejs');
+var express = require('express');
+var router = express.Router();
+var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt-nodejs');
 
-    router.post('/', (req, res)=>{
-        var userID = req.body.userID;
-        var password = req.body.password;
+router.route('/')
+.get((req, res) => {
+	res.render('./login', {authID: req.session.student_id});
+})
+.post((req, res) => {
+	var userID = req.body.userID;
+	var password = req.body.password;
 
-        var sql = 'SELECT * FROM Student WHERE Student_Id=?';
-        conn.query(sql, [userID], (err, result)=>{
-            if(err){
-                console.log('err : ' + err);
-                res.status(500).send("Internal Server Error");
-            } else {
-                if(result.length === 0){
-                    res.send('User Not Found');
-                } else {
-                    if(password === result[0].Student_Passwd){
-                        req.session.authID = userID;
-                        req.session.save(()=>{
-                            res.redirect('/track');
-                        });
-                    } else {
-                        res.redirect('/login');
-                    }
-                }
-            }
-        });
-    });
+	var sql = 'SELECT * FROM Student WHERE Student_Id=? and Student_Passwd=?';
+	pool.query(sql, [userID, password], (err, result) => {
+		if (err)
+		{
+			console.log('err: ' + err);
+			res.status(500).send(err);
+		} 
+		else 
+		{
+			if(result.length === 0)
+			{
+				res.send('User Not Found');
+			}
+			else 
+			{
+				if (password === result[0].Student_Passwd)
+				{
+					var student_name = result[0].Student_Name;
 
-    router.get('/', (req, res)=>{
-        if(req.session.authID){
-            res.redirect('/track');
-        } else {
-            res.render('./login', {authID: req.session.authID});
-        }
-    });
+					req.session.student_id = userID;
+					req.session.student_name = student_name;
+					
+					res.redirect('/index');
+				}
+				else
+				{
+					res.send('Password is not correct');
+				}
+			}
+		}
+	});
+});
 
-    return router;
-}
+module.exports = router;

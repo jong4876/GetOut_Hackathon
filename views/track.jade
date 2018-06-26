@@ -11,7 +11,8 @@ html
     div(class="navbar navbar-default navbar-static-top" style="background: #a31432")
       div(class="conatiner" style="color: white;")
         div(style="padding-bottom:6px; padding-left:10px; float: left")
-          h1 Sejong Tracker
+          a(href="/" style="text-decoration: none;")
+            h1(style="color:white;") Sejong Tracker
         div(style="margin-right: 20px; float:right; margin-top: 20px; vertical-align:middle")
           p
             a(href="/logout") logout
@@ -40,4 +41,3 @@ html
             e.preventDefault()
             $(this).tab('show')
           })
-          
