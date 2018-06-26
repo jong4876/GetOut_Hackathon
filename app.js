@@ -6,8 +6,21 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var subjectRouter = require('./routes/subject');
 
 var app = express();
+
+var mysql = require('mysql');
+var db_config = require('./config/db_config.json');
+
+global.pool = mysql.createPool({
+  host : db_config.host,
+  port : db_config.port,
+  user : db_config.user,
+  password : db_config.password,
+  database : db_config.database,
+  connectionLimit : db_config.connectionLimit
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/subject', subjectRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
