@@ -1,7 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p Hello, #{authID}
-  
+	h1= title
+	p Welcome to #{title}
+	p Hello, #{authID}
+	each notice in notices
+		p #{notice.Notice_title}, #{notice.Notice_content}
+	each fin_subject in fin_subjects
+		p #{fin_subject.Fin_Student_Id}, #{fin_subject.Fin_Subject_Id}
