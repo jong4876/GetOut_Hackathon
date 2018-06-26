@@ -34,34 +34,77 @@ html
           p 김태우님
     div(class="container")
       #layout(style='width:1100px; height: 630px; display:block;')
-        .left(style="background:#ffd7e0; margin-right: 10px; elevation: above")
-          div(style="height:70px; text-align:center; background:#EF90A6")
+        .left(style="background:#a0f67e; margin-right: 10px; elevation: above;border-radius: 2px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);")
+          div(style="height:70px; text-align:center; background:#243A25")
             p(style="padding-top: 20px; font-size:25px; color: white; font-weight:bold") CURRICULUM
           div
             table(class="table table-hover")
               tbody(style="text-align:center")
                 tr(style="height: 100px; font-size:25px;")
-                  td(style="padding-top:33px; color: white") 1학년
+                  td(style="padding-top:33px; color: white" type='button', data-toggle='modal', data-target='#exampleModal', data-whatever='@getbootstrap' id="1") 1학년
                 tr(style="height: 100px; font-size:25px;")
-                  td(style="padding-top:33px; color: white") 2학년
+                  td(style="padding-top:33px; color: white" type='button', data-toggle='modal', data-target='#exampleModal', data-whatever='@getbootstrap' id="2") 2학년
                 tr(style="height: 100px; font-size:25px;")
-                  td(style="padding-top:33px; color: white") 3학년
+                  td(style="padding-top:33px; color: white" type='button', data-toggle='modal', data-target='#exampleModal', data-whatever='@getbootstrap' id="3") 3학년
                 tr(style="height: 100px; font-size:25px;")
-                  td(style="padding-top:33px; color: white") 4학년
-
-        .right(style="background:#cfd2d6; margin-left: 10px")
+                  td(style="padding-top:33px; color: white" type='button', data-toggle='modal', data-target='#exampleModal', data-whatever='@getbootstrap' id="4") 4학년
+        .right(style="background:#cfd2d6; margin-left: 10px;border-radius: 2px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);")
           div(style="height:70px; text-align:center;")
             p(style="padding-top: 20px; font-size:25px; font-weight:bold") 트랙 진행율
           div(id="chart" style="height:500px; width:200px;")
 
-        .header(style="background:#242930; margin-top: 10px; margin-bottom: 10px; color:white") Sejong University
-        .center(style="margin: 10px; text-align:center")
-          div(style="margin-bottom: 10px")
+        .header(style="background:#242930; margin-top: 10px; margin-bottom: 10px; color:white; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);") Sejong University
+        .center(style="margin: 10px; text-align:center; border-radius: 2px;")
+          div(style="margin-bottom: 10px;box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);")
             a(href="/track")
-              img(src="/trackImg.jpg" width="550px")
-          div(style="background: #f9eaec; height: 205px")
-            | 공지사항
-            
+              img(src="/trackImg.jpg" width="575px")
+          div(style="background: white; height: 195px;box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);")
+            div(style="background:red; height: 38px; padding-top:8px;")
+              p(style="font-size: 20px; font-weight:bold") 공지사항
+              ul(class="list-group")
+                -for(var i = 0; i<3; i++)
+                  li(class="list-group-item" style="height: 42px;")
+                    a(href="#")= notices[i]['Notice_title']
+
+
+      #exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+              h4#exampleModalLabel.modal-title 3학년 과목
+            .modal-body
+              div
+                h3(style="font-weight:bold") 3-1
+                ul
+                  li 웹프로그래밍 설계
+                  li 컴퓨터 그래픽스
+                  li 신호 및 시스템
+                  li 데이터베이스
+                  li 프로그래밍 언어의 개념
+                  li VHDL
+                  li 게임 프로그래밍
+                  li 모바일 프로그래밍
+                  li 운영체제
+              hr
+              div
+                h3(style="font-weight:bold") 3-2
+                ul
+                  li 웹기반시스템
+                  li xml프로그래밍
+                  li 디지털신호처리
+                  li 멀티미디어 데이터베이스
+                  li 디지털 신호처리
+                  li 통신시스템
+                  li UNIX
+                  li 소프트웨어 공학
+                  li 멀티코어 프로그래밍
+                  li 고급 실시간 그래픽스
+                  li 디지털 사운드
+                  li 인공지능
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close              
 
       script(type='text/javascript').
         $(document).ready(function () {
@@ -100,5 +143,15 @@ html
             }
           }
         });
+    script.
+      $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
 
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+      })      
+
+  
 

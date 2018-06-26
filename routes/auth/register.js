@@ -13,7 +13,7 @@ router.route('/')
     var password = req.body.password;
 
     //bcrypt.hash(password, null, null, (err, hash)=>{
-    var sql = 'INSERT INTO Student VALUES(?,?,?)';
+    var sql = 'INSERT INTO Student(Student_Id, Student_Name, Student_Passwd) VALUES(?,?,?)';
     pool.query(sql, [userID, username, password], (err, result)=>{
         if(err){
             console.log('err : ' + err);
@@ -21,8 +21,9 @@ router.route('/')
         }else{
             console.log(result);
             req.session.authID = userID;
+            req.session.username = username;
             req.session.save(()=>{
-                res.redirect('/login');
+                res.redirect('/index');
             });
         }
     });
