@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	style.
+		form {display: inline;}
+		form>button {width: 100px; height: 30px;}
+	h1= title
+
+	form(action='mypage')
+		button= '나의 트랙'
+	form(action='qna')
+		button= '1:1 문의'
+	p= #{track1.Track_img} #{track1.Track_name}
+	p= #{track2.Track_img} #{track2.Track_name}
