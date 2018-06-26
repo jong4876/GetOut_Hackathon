@@ -32,10 +32,8 @@ module.exports = function(conn){
                 if(subjects.length == 0){
                     res.send("이 대학교는 강의가 없습니다.");
                 } else {
-                    console.log('len:', subjects.length);
                     for(var idx in subjects){
                         var trackname = subjects[idx].Track_Name;
-                        console.log(trackname);
                         for(var i = 0; i<trackCnt; i++){
                             if(parseInt(trackname[i]) == 1){
                                 tracks[i].push(subjects[idx]);

@@ -9,7 +9,7 @@ router.use('/login', login);
 var register = require('./auth/register')(conn);
 router.use('/register', register);
 
-var logout = require('./auth/logout');
+var logout = require('./auth/logout')();
 router.use('/logout', logout);
 
 var track = require('./track')(conn);

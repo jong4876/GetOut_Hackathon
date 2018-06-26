@@ -5,7 +5,11 @@ module.exports = function(conn){
     var bcrypt = require('bcrypt-nodejs');
 
     router.get('/', (req, res)=>{
-        res.render('./register')
+        if(req.session.authID){
+            res.redirect('/track');
+        } else {
+            res.render('./register');
+        }
     });
 
     router.post('/', (req, res)=>{

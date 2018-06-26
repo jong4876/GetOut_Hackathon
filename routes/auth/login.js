@@ -19,9 +19,11 @@ module.exports = function(conn){
                 } else {
                     if(password === result[0].Student_Passwd){
                         req.session.authID = userID;
-                        res.send('Welcome, ' + result[0].Student_Name);
+                        req.session.save(()=>{
+                            res.redirect('/track');
+                        });
                     } else {
-                        res.send('Password is not correct');
+                        res.redirect('/login');
                     }
                 }
             }
@@ -29,14 +31,11 @@ module.exports = function(conn){
     });
 
     router.get('/', (req, res)=>{
-        res.render('./login', {authID: req.session.authID});
-    });
-
-    router.post('/logout', (req, res)=>{
-        delete req.session.authID;
-        req.session.save(()=>{
-            res.redirect('/login');
-        });
+        if(req.session.authID){
+            res.redirect('/track');
+        } else {
+            res.render('./login', {authID: req.session.authID});
+        }
     });
 
     return router;

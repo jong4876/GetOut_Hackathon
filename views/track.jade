@@ -7,11 +7,16 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
 
-
   body
     div(class="navbar navbar-default navbar-static-top" style="background: #a31432")
       div(class="conatiner" style="color: white;")
-        h1 Sejong Tracker
+        div(style="padding-bottom:6px; padding-left:10px; float: left")
+          h1 Sejong Tracker
+        div(style="margin-right: 20px; float:right; margin-top: 20px; vertical-align:middle")
+          p
+            a(href="/logout") logout
+        div(style="margin-right: 20px; float:right; margin-top: 20px; vertical-align:middle")
+          p 김태우님
     div(class="container" style="padding-top: 70px;")
       div(role="tabpanel")
           ul(class="nav nav-tabs nav-justified" role="tablist" id="myTab" )
@@ -26,7 +31,7 @@ html
             div(role="tabpanel" class="tab-pane" id=`a${i}`)
               ul(class="list-group")
                 each track in tracks[i]
-                  if track.Subject_Id == 1413
+                  if track.Subject_Name == "선형대수및프로그래밍"
                     li(class="list-group-item list-group-item-success")= track.Subject_Name
                   else
                     li(class="list-group-item")= track.Subject_Name
