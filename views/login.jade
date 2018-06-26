@@ -1,7 +1,10 @@
 doctype html
 html
     head
+        meta(charset='utf-8')
     body
+        if authID
+            h3=authID
         h1 Login
         form(action="/auth/login" method='post')
             p

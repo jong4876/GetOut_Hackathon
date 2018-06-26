@@ -33,9 +33,12 @@ app.use(session({
       host: 'localhost',
       port: 3306,
       user: 'root',
-      password: 'qlrqodxodn12',
+      password: '1234',
       database: 'hackathon'
-  })
+  }),
+  cookie:{
+    maxAge: 24000 * 60 * 60 // 쿠키 유효기간 : 24시간
+  }
 }));
 
 var conn = require('./config/db')();

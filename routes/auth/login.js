@@ -24,6 +24,7 @@ module.exports = function(conn){
                     if(password != result[0].Student_Passwd){
                         res.send('Password is not correct');
                     } else {
+                        req.session.authID = userID;
                         res.send('Welcome, ' + result[0].Student_Name);
                     }
                 }
@@ -32,7 +33,7 @@ module.exports = function(conn){
     });
 
     router.get('/login', (req, res)=>{
-        res.render('./login');
+        res.render('./login', {authID: req.session.authID});
     });
 
     router.get('/register', (req, res)=>{
@@ -50,10 +51,18 @@ module.exports = function(conn){
                 console.log('err : ' + err);
                 res.status(500).send("Internal Server Error");
             }else{
+                req.session.authID = userID;
                 req.session.save(()=>{
                     res.redirect('/auth/login');
                 });
             }
+        });
+    });
+
+    router.post('/logout', (req, res)=>{
+        delete req.session.authID;
+        req.session.save(()=>{
+            res.redirect('/auth/login');
         });
     });
 
