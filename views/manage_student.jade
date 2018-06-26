@@ -1,0 +1,27 @@
+extends layout
+
+block content
+	h1= title
+
+	h2 Insert Student
+	form(action='student' method='post')
+		p
+			input(type='text' name='id' placeholder = '학번')
+		p
+			input(type='text' name='name' placeholder = '이름')
+		p
+			input(type='password' name='pw' placeholder = '패스워드')
+		p
+			input(type='submit')
+
+	h2 Student List
+	table(style='border: 1px solid black;')
+		tr
+			th id
+			th name
+			th password
+		each row in rows
+			tr
+				td #{row.Student_Id}
+				td #{row.Student_Name}
+				td #{row.Student_Passwd}
