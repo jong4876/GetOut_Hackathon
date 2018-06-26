@@ -1,23 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-var conn = require('../config/db')();
-
-var login = require('./auth/login')(conn);
-router.use('/login', login);
-
-var register = require('./auth/register')(conn);
-router.use('/register', register);
-
-var logout = require('./auth/logout');
-router.use('/logout', logout);
-
-var track = require('./track')(conn);
-router.use('/track', track);
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	console.log('session',req.session);
+	res.render('index', { title: 'Express', authID: req.session.student_id });
 });
 
 module.exports = router;

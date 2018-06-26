@@ -4,14 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
-var MySQLStore = require('express-mysql-session')(session);
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var subjectRouter = require('./routes/subject');
-// manage
-var manageRouter = require('./routes/manage');
-var studentRouter = require('./routes/manage/student');
+// var MySQLStore = require('express-mysql-session')(session);
 
 var app = express();
 
@@ -37,13 +30,13 @@ app.use(session({
   secret: 'wqlker129038ksadlku98123hnkjsandjoi13',
   resave: false,
   saveUninitialized: true,
-  store: new MySQLStore({
-      host: 'hojong.xyz',
-      port: 3306,
-      user: 'hackathon_2018_1',
-      password: 'wjswhdgh',
-      database: 'hackathon_2018_1_db'
-  }),
+  // store: new MySQLStore({
+  //     host: 'hojong.xyz',
+  //     port: 3306,
+  //     user: 'hackathon_2018_1',
+  //     password: 'wjswhdgh',
+  //     database: 'hackathon_2018_1_db'
+  // }),
   cookie:{
     maxAge: 24000 * 60 * 60 // 쿠키 유효기간 : 24시간
   }
@@ -56,12 +49,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/subject', subjectRouter);
+app.use('/', require('./routes/index'));
+app.use('/index', require('./routes/index'));
+app.use('/track', require('./routes/track'));
+app.use('/search', require('./routes/search'));
+app.use('/mypage', require('./routes/mypage'));
+// auth
+app.use('/login', require('./routes/auth/login'));
+app.use('/logout', require('./routes/auth/logout'));
+app.use('/register', require('./routes/auth/register'));
 // manage
-app.use('/manage', manageRouter);
-app.use('/manage/student', studentRouter);
+app.use('/manage', require('./routes/manage'));
+app.use('/manage/student', require('./routes/manage/student'));
 
 
 // catch 404 and forward to error handler
