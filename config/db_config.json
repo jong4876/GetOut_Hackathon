@@ -1,8 +1,0 @@
-{
-        "host" : "hojong.xyz",
-        "port" : "3306",
-        "user" : "hackathon_2018_1",
-        "password" : "wjswhdgh",
-        "database" : "hackathon_2018_1_db",
-        "connectionLimit" : "50"
-}
