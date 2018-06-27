@@ -44,7 +44,7 @@ router.route('/')
                             tracks[i].push(subjects[idx]);
                     }
                 }
-                res.render('track',{tracks: tracks, trackName: trackName, id: req.session.authID});
+                res.render('track',{tracks: tracks, trackName: trackName, authID: req.session.student_id});
             }
         }
     });

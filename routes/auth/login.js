@@ -10,6 +10,7 @@ router.route('/')
 .post((req, res) => {
 	var userID = req.body.userID;
 	var password = req.body.password;
+	console.log('login', userID, password);
 
 	var sql = 'SELECT * FROM Student WHERE Student_Id=? and Student_Passwd=?';
 	pool.query(sql, [userID, password], (err, result) => {
